@@ -1,0 +1,414 @@
+{
+	"info": {
+		"_postman_id": "368a0041-e519-4c9a-b590-ae3fb7395dc2",
+		"name": "Mini_Insta",
+		"description": "Social media backend where users can post content, follow/unfollow others, and view a feed of posts from users they follow. Users can also hide or block specific users, which impacts the feed visibility.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37734920"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"user1\",\n  \"password\": \"password123\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/auth/register/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"auth",
+						"register",
+						""
+					]
+				},
+				"description": "Register a new user.\n\nRequest Body: { \"username\": \"user1\", \"password\": \"password123\" }"
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"user1\",\n  \"password\": \"password123\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/auth/login/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"auth",
+						"login",
+						""
+					]
+				},
+				"description": "Login and retrieve a token."
+			},
+			"response": []
+		},
+		{
+			"name": "Post Creation",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM3NDczMDI5LCJpYXQiOjE3Mzc0NzI3MjksImp0aSI6IjliYTJlOTI3MzU5ZTQ2NjQ4YWQ4NGM4YjAzMjJmMWZlIiwidXNlcl9pZCI6MX0.S4Sqx212Hol6nybXDuK2pVT-Gy5mvJVOyuSmaBfFlLw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"content\": \"This is my first post!\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/posts/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"posts",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				},
+				"description": "Create a new post.Request Body: { \"content\": \"This is my first post!\" }"
+			},
+			"response": []
+		},
+		{
+			"name": "Follow User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM3NDczMDI5LCJpYXQiOjE3Mzc0NzI3MjksImp0aSI6IjliYTJlOTI3MzU5ZTQ2NjQ4YWQ4NGM4YjAzMjJmMWZlIiwidXNlcl9pZCI6MX0.S4Sqx212Hol6nybXDuK2pVT-Gy5mvJVOyuSmaBfFlLw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/users/user1/follow/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"user1",
+						"follow",
+						""
+					]
+				},
+				"description": "Follow a specific user.Validation: Prevent following oneself and prevent duplicate follows."
+			},
+			"response": []
+		},
+		{
+			"name": "Unfollow User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM3NDczMDI5LCJpYXQiOjE3Mzc0NzI3MjksImp0aSI6IjliYTJlOTI3MzU5ZTQ2NjQ4YWQ4NGM4YjAzMjJmMWZlIiwidXNlcl9pZCI6MX0.S4Sqx212Hol6nybXDuK2pVT-Gy5mvJVOyuSmaBfFlLw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/users/user1/unfollow/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"user1",
+						"unfollow",
+						""
+					]
+				},
+				"description": "Unfollow a specific user."
+			},
+			"response": []
+		},
+		{
+			"name": "Hide or Block User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM3NDczMDI5LCJpYXQiOjE3Mzc0NzI3MjksImp0aSI6IjliYTJlOTI3MzU5ZTQ2NjQ4YWQ4NGM4YjAzMjJmMWZlIiwidXNlcl9pZCI6MX0.S4Sqx212Hol6nybXDuK2pVT-Gy5mvJVOyuSmaBfFlLw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"action\": \"BLOCK\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/users/user1/action/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"user1",
+						"action",
+						""
+					]
+				},
+				"description": "Hide or block a specific user.\n\nRequest Body: { \"action\": \"HIDE\" } or { \"action\": \"BLOCK\" }\n\nLogic:\n\nHIDE: Posts from the target user are excluded from the feed.\n\nBLOCK: Fully restrict interactions (cannot follow/unfollow, view posts, or access profile)."
+			},
+			"response": []
+		},
+		{
+			"name": "Unhide or Unblock",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM3NDczMDI5LCJpYXQiOjE3Mzc0NzI3MjksImp0aSI6IjliYTJlOTI3MzU5ZTQ2NjQ4YWQ4NGM4YjAzMjJmMWZlIiwidXNlcl9pZCI6MX0.S4Sqx212Hol6nybXDuK2pVT-Gy5mvJVOyuSmaBfFlLw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/users/user1/action/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"user1",
+						"action",
+						""
+					]
+				},
+				"description": "Remove a HIDE or BLOCK action on a user."
+			},
+			"response": []
+		},
+		{
+			"name": "Feed",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM3NDczMzgzLCJpYXQiOjE3Mzc0NzMwODMsImp0aSI6IjBmYjZlMmQ3YTEyNzQ5MmM4Y2ExZjJlOGI3YTkzNDgzIiwidXNlcl9pZCI6MX0.nPUzulQ6W18hnUsgK21vw66CfpovoriS-NMfUt99BNo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/posts/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"posts",
+						""
+					]
+				},
+				"description": "Retrieve posts from users the logged-in .\n\nUser is following, excluding.\n\nUsers marked as HIDE.\n\nUsers marked as BLOCK.\n\nPosts are sorted by created_at (most recent first).\n\nPaginated response."
+			},
+			"response": []
+		},
+		{
+			"name": "Followers",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM3NDc3MTUyLCJpYXQiOjE3Mzc0NzY4NTIsImp0aSI6IjdhYjE1NjRlZWE1NTRiODQ5MzVhMzRhY2IwYzI1Yzg0IiwidXNlcl9pZCI6MX0.Wh8mInlbmN0-tuxOwRk0CijrcJXCxoBxU0z2rmbYLxs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/users/mann/followers/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"mann",
+						"followers",
+						""
+					]
+				},
+				"description": "A list of followers of the specified user."
+			},
+			"response": []
+		},
+		{
+			"name": "Following",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM3NDc3MTUyLCJpYXQiOjE3Mzc0NzY4NTIsImp0aSI6IjdhYjE1NjRlZWE1NTRiODQ5MzVhMzRhY2IwYzI1Yzg0IiwidXNlcl9pZCI6MX0.Wh8mInlbmN0-tuxOwRk0CijrcJXCxoBxU0z2rmbYLxs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/users/mann/following/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"mann",
+						"following",
+						""
+					]
+				},
+				"description": "A list of users that the specified user is following."
+			},
+			"response": []
+		},
+		{
+			"name": "All Actions(list of blocked or hidden)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM3NDc3MTUyLCJpYXQiOjE3Mzc0NzY4NTIsImp0aSI6IjdhYjE1NjRlZWE1NTRiODQ5MzVhMzRhY2IwYzI1Yzg0IiwidXNlcl9pZCI6MX0.Wh8mInlbmN0-tuxOwRk0CijrcJXCxoBxU0z2rmbYLxs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/users/actions/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"actions",
+						""
+					]
+				},
+				"description": "A list of actions (hidden/blocked users) by the logged-in user."
+			},
+			"response": []
+		}
+	]
+}
